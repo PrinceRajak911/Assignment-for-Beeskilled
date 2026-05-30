@@ -1,0 +1,66 @@
+def calculate_average(marks):
+    """
+    Calculates the average from a list of marks.
+    """
+    if not marks:
+        return 0
+    return sum(marks) / len(marks)
+
+def determine_grade(average):
+    """
+    Assigns a letter grade based on the average score.
+    Scale: A (90-100), B (80-89), C (70-79), D (60-69), F (<60)
+    """
+    if average >= 90:
+        return 'A'
+    elif average >= 80:
+        return 'B'
+    elif average >= 70:
+        return 'C'
+    elif average >= 60:
+        return 'D'
+    else:
+        return 'F'
+
+def main():
+    print("?? Student Grade Calculator ??")
+    print("------------------------------")
+    
+    try:
+        # Ask for the total number of subjects
+        num_subjects = int(input("Enter the total number of subjects: "))
+        
+        if num_subjects <= 0:
+            print("Error: You must enter at least 1 subject.")
+            return
+
+        marks = []
+        
+        # Loop to collect marks for each subject
+        for i in range(1, num_subjects + 1):
+            while True:
+                try:
+                    mark = float(input(f"Enter marks for subject {i} (0-100): "))
+                    if 0 <= mark <= 100:
+                        marks.append(mark)
+                        break
+                    else:
+                        print("Error: Marks must be between 0 and 100.")
+                except ValueError:
+                    print("Error: Invalid input. Please enter a numerical value.")
+
+        # Calculate results
+        average = calculate_average(marks)
+        grade = determine_grade(average)
+
+        # Print the final report
+        print("\n--- ?? Final Report ---")
+        print(f"Total Marks: {sum(marks):.1f} / {num_subjects * 100}")
+        print(f"Average:     {average:.2f}%")
+        print(f"Final Grade: {grade}")
+
+    except ValueError:
+        print("\nError: Invalid input. Please enter a whole number for the number of subjects.")
+
+if __name__ == "__main__":
+    main()
