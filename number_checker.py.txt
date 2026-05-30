@@ -1,0 +1,58 @@
+import math
+
+def check_even_odd(number):
+    """
+    Determines if a number is even or odd.
+    """
+    if number % 2 == 0:
+        return "Even"
+    else:
+        return "Odd"
+
+def check_prime(number):
+    """
+    Determines if a number is prime.
+    A prime number is greater than 1 and only divisible by 1 and itself.
+    """
+    # Numbers less than or equal to 1 are not prime
+    if number <= 1:
+        return False
+    
+    # 2 is the only even prime number
+    if number == 2:
+        return True
+    
+    # Exclude all other even numbers
+    if number % 2 == 0:
+        return False
+    
+    # Check for odd factors up to the square root of the number
+    for i in range(3, int(math.sqrt(number)) + 1, 2):
+        if number % i == 0:
+            return False
+            
+    return True
+
+def main():
+    print("?? Even/Odd & Prime Number Checker ??")
+    print("---------------------------------------")
+    
+    try:
+        # Request integer input from the user
+        num = int(input("Enter an integer to check: "))
+        
+        # Check Even/Odd
+        parity = check_even_odd(num)
+        print(f"\nResult 1: {num} is an {parity} number.")
+        
+        # Check Prime
+        if check_prime(num):
+            print(f"Result 2: {num} is a Prime number.")
+        else:
+            print(f"Result 2: {num} is NOT a Prime number.")
+            
+    except ValueError:
+        print("\nError: Invalid input. Please enter a whole number (integer).")
+
+if __name__ == "__main__":
+    main()
